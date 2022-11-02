@@ -14,5 +14,5 @@ export interface Product {
 
 export interface ProductResolved {
   product: Product | null;
-  error?: string;
+  error?: any;
 }

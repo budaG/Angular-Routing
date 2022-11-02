@@ -11,10 +11,20 @@ export class ProductEditInfoComponent implements OnInit {
   @ViewChild(NgForm) productForm?: NgForm;
 
   errorMessage = '';
-  product = { id: 1, productName: 'test', productCode: 'test', description: 'test' };
+  product!: Product;
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.parent?.data.subscribe(
+      data => {
+        if (this.productForm) {
+          this.productForm.reset();
+        }
+        const resolvedData = data['resolvedData'];
+        this.product = resolvedData.product;
+        this.errorMessage = resolvedData.errorMessage;
+      }
+    );
   }
 }
